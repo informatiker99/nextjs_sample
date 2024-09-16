@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import MaxWidthWrapper from "../../components/maxWidthWrapper";
+import Link from "next/link";
 
 const Page = () => {
   return (
-    <div>Page</div>
-  )
-}
+    <MaxWidthWrapper>
+      <div>
+        <Link href="/articles" >Go to articles</Link>
+      </div>
+    </MaxWidthWrapper>
+  );
+};
 
-export default Page
+export default Page;
