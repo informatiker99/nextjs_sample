@@ -1,0 +1,8 @@
+{
+  "products": [
+    { "id": "1", "title": "this is title 1" , "description" :"This is the lorem1" },
+    { "id": "2", "title": "this is title 2" , "description" :"This is the lorem2" },
+    { "id": "3", "title": "this is title 3" , "description" :"This is the lorem3" }
+  ]
+}
+

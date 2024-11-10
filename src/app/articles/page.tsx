@@ -1,21 +1,35 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { ArticleTypes } from "../../../types/articles";
 import Link from "next/link";
 
-const Articles = async () => {
-  const data = await fetch(`https://api.vercel.app/blog`, {
-    cache: "force-cache",
-  });
-  const posts = await data.json();
+const Articles = () => {
+  const [posts, setPosts] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users`
+      );
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <div className="flex gap-4 flex-wrap w-full justify-center">
+    <div className="flex  gap-2 flex-wrap w-full justify-center">
       {posts.length > 0 &&
         posts.map((article: ArticleTypes, index: number) => {
           return (
             <div
               key={index}
-              className="flex border md:text-base text-sm   flex-col rounded-lg shadow-md items-center px-2 py-3 "
+              className="flex border md:text-base text-sm   flex-col rounded-lg shadow-md items-center px-2 py-3 w-60 "
             >
               <div className="w-full flex justify-start mx-1 p-2">
                 <span className="text-white bg-red-600 rounded-md text-sm p-1 ">
