@@ -1,3 +1,4 @@
+"use server";
 import { Lucia } from "lucia";
 import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
 import db from "./db";
@@ -69,4 +70,23 @@ export const verifyAuth = async () => {
   } catch (error) {}
 
   return result;
+};
+
+export const destroySession = async () => {
+  const { session } = await verifyAuth();
+  if (!session) {
+    return {
+      error: "unauthorized",
+    };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  );
+  
 };
